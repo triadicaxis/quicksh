@@ -1,0 +1,114 @@
+SOURCES:
+https://www.youtube.com/watch?v=QBlENrp2wns&index=10&list=PL7B7FA4E693D8E790
+https://www.youtube.com/watch?v=w8a-smrPlvE
+https://www.youtube.com/user/madhurbhatia89
+
+HELP:
+man mkdir ## gives you all the help info on the mkdir command, q to quit
+
+INSTALL STUFF:
+sudo apt-get -f install ## to update everything?
+sudo apt-get install unity-control-center
+sudo apt-get install gnome-tweak-tool
+
+
+EXECUTE R OR PYTHON SCRIPTS FROM TERMINAL:
+python myscript.py ## need to ensure that right click > properties > permissions > executable is ticked, or use chmod
+Rscript myscript.R ## same thing with the permissions
+R CMD BATCH myscript.R ## executes the script and saves everything to myscript.R.Rout
+R ## and then run: source('myscript.R')
+
+EXECUTE SHELL SCRIPT FROM TERMINAL:
+sh shscript1.sh ## execute shell script, which will be executed sequentially, 
+
+## e.g. script, save the following text as shscript.sh and then execute using sh shscript.sh:
+echo "Please enter your name"
+read my_name
+echo "Hello $my_name, how about a coffee?!"
+
+
+INSPECT STUFF BEFORE INSTALLING IT:
+apt-cache pkgnames
+apt-cache search vsftpd
+apt-cache show netcat
+
+
+LINKS (HARD AND SOFT):
+ln oldfile newfile ## create a hard replica of the content of a file
+ln OldFolder NewFolder ## create a hard replica of the content of a folder
+ln -s newfile newfile_soft ## create a soft link (pointer) to a file (or folder)
+
+
+FILES AND FOLDERS:
+touch myfile1 myfile2 ## create two new empty text files
+touch .myhiddenfile ## create a hidden file
+cat > myfile3 ## create a new text file and fill it with contents, ctrl+d to close it
+cat < myfile3 ## view the contents of the newly created file
+cat myfile1 myfile3 > mergedfile ## to merge the contents of myfile1 and myfile3
+
+sort myfile ## sort the lines in myfile aplhabetically
+cut -d"-" -f 1,3 mytable ## extract the 1st and 3rd column of a hyphen separarated table from the file mytable
+dd if=myfile of=myout conv=ucase ## convert the contents of myfile to upper case and save the output in new file myout
+
+nano file_name ## edit a file in the terminal, ctrl+x and y to exit
+mv myfile NewFolder ## move a file to NewFolder
+mv oldfile newfile ## rename a file
+cp myfile NewFolder ## copy a file to NewFolder
+rm myfile ## remove a file
+rm my* ## remove all files that start with "my"
+
+pwd ## show the present working directory
+ls ## list items in the present working directory
+ls -l ## list items and show their permissions
+ls -a ## list all items, including hidden files
+ls -a -l ## combine the above
+
+file * ## show details of all files and folder in the present working directory
+wc myfile ## gives the number of lines, words and characters
+wc -l myfile ## shows the number of lines in myfile
+wc -w myfile ## shows the number of words in myfile
+wc -c myfile ## shows the number of characters in myfile
+
+dir ## list items in the present working directory
+mkdir ## create a folder
+mkdir Documents/MyFolder
+rm -r MyFolder ## remove MyFolder
+rmdir MyFolder ## remove MyFolder
+
+
+PERMISSIONS FOR FILES AND FOLDERS:
+## there are three categories of users of the operating system: owner, group, other users
+## each user category can have any combination of read, write or execute permissions.
+## unix permission codes:
+read = 4
+write = 2
+execute = 1
+
+umask ## look at last three digits to work out default file or folder permissions for the three categories of users
+e.g. if last three digits show 022, unix subtracts it from 666 to give the file default permissions, so..
+666 - 22 = 644 ## means default permissions for the owner 6=read+write, group 4=read, others 4=read
+similar thing applies to folders except unix subtracts those three digits from 777, so..
+777 - 22 = 755 ## means default permission for the owner 7=read+write+execute, group 5=read+write, others 5=read+write
+
+chmod 777 myfile ## gives full permissions to all three categories of users (owner, group, other users)
+chmod 777 MyFolder ## gives full permissions to all three categories of users (owner, group, other users)
+
+
+DATE TIME AND SYSTEM:
+who am i ## shows user details
+uname -a ## gives system information including, e.g.:
+## kernel: Linux
+## machine name: Green
+## kernel version: 3.16.0-41-generic Ubuntu
+## system date: SMP Thu Jun 18
+## processor architecture: x86_64 x86_64 x86_64
+
+cal ## shows the current month calendar
+cal 7 2006 ## shows the calendar for July 2006
+cal feb 2015 ## shows the calendar for July 2006
+
+date
+date '+DATE: %d-%m-%y%nTIME: %H:%M:S' ## specify the date and time format
+
+NETWORKING:
+ifconfig ## similar to ipconfig

@@ -1,0 +1,11 @@
+1. How to install ClamTK 5.09 on Ubuntu 14.04 & Ubuntu 14.10:
+
+sudo apt-get install gdebi
+
+wget https://bitbucket.org/dave_theunsub/clamtk/downloads/clamtk_5.09-1_all.deb
+
+sudo gdebi clamtk_5.09-1_all.deb
+
+2. How to remove clamtk 5.09:
+
+sudo dpkg --purge clamtk

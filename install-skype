@@ -1,0 +1,13 @@
+http://www.unixmen.com/install-skype-ubuntu-14-1014-0412-04/
+
+Prior to version Skype 4.3, it was available as binary file, so that users can only download the binary file from it’s official and install it manually. But, as of version 4.3, Skype is available in the Canonical Partners repository.
+
+Step 1: To enable the Canonical Partners repository, go to Software & Updates from Unity dash (System Settings). Navigate to Other Software tab, and enable Canonical Partners repository.
+
+Step 2: Cick Close, and Reload buttons to update the cache. 
+
+Step 3: Launch the terminal (ctrl+alt+t) and type the following command to install Skype:
+
+sudo apt-get install skype
+
+That’s it! Open Skype, and log in to your Skype account and stat chatting.
