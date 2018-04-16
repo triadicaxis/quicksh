@@ -4,9 +4,24 @@
 # https://ss64.com/bash/rename.html
 # https://unix.stackexchange.com/questions/159513/what-are-the-shells-control-and-redirection-operators
 
-# 
+## Navigation:
+
 pwd # path of present working directory
 cd [dir] # change working directory to [dir]
+
+# relative vs absolute paths
+/ = root directory
+./ = current directory
+../ = parent directory
+~/ = home directory
+
+# example: assume you're starting in /etc/wibble, then..
+cd foo/bar # go to the directory /etc/wibble/foo/bar
+cd /foo/bar # go to the directory /foo/bar
+cd ./foo/bar # go to the directory /etc/wibble/foo/bar
+cd ../foo/bar # go to the directory /etc/foo/bar
+cd ~/foo/bar # go to the directory /home/<user>/wibble/foo/bar
+
 ls -al # list files in working directory, -h human, -R recursive, -S by size, -t by date
 apropos [pattern] # search for [pattern] in the command manual
 man [command] # display the manual entry for [command]
@@ -46,6 +61,31 @@ mkdir ~/One/Two{1..3}
 echo {01..20} | xargs mkdir # create multiple folders 01-20
 ln -s [file] link # make a link to [file]
 
+cp [file1] [file2] # copy [file1] to [file2]
+cp -r [dir1] [dir2] # recursively copy folder [dir1] to [dir2]
+mv [file1] [file2] # rename [file1] to [file2]
+mv [file] [dir] # move [file] into [dir], create [dir] if absent
+rm [file1] [file2] # delete multiple files
+rm -r [dir] # recursively delete folder [dir] and its contents
+ls | xargs rm -r # recursively delete everything in the working directory
+
+more -10 [file] # display the contents of [file], first 10 lines only
+less [file] # open [file] in vi editor, ctrl+Z to close
+
+# date format
+date +'%Y-%m-%d' # in YYYY-MM-DD
+date +'%Y-%m-%d-%H%M%S' # in YYYY-MM-DD-HHMMSS
+date +%s # number of seconds since the epoch.
+date +%s%N # number of seconds + current nanoseconds.
+echo $(($(date +%s%N)/1000000)) # therefore current time in miliseconds
+
+grep -r [pattern] # display the file paths and text lines containing [pattern]
+[command] | grep [pattern] # find [pattern] in the STDOUT of [command]
+find -iname "*.txt" | xargs grep "abc" # find the string abc in all txt files, case insensitive
+ls *.jpg | xargs -n1 -i cp {} /external-hard-drive/directory # copy all images to external drive
+find / -name *.jpg -type f -print | xargs tar -cvzf images.tar.gz # find all jpg images in the system and archive them
+echo 'dir1 dir2 dir3' | xargs mkdir # make multiple directories
+
 # example1: create multiple files and multiple folders
 for i in {01..12}; do touch "file`basename $i`.txt"; done # multiple file00.txt files
 for i in {01..12}; do mkdir "dir`basename $i`"; done # multiple dir00 folders
@@ -62,21 +102,18 @@ for i in *; do mv "$i" "file`basename $i`.txt"; done # then rename the files
 for i in {01..12}; do mkdir "dir${i%}"; done # make multiple directories
 find . -type d -exec touch {}/file{01..04}.txt \; # make four txt files in each
 
-cp [file1] [file2] # copy [file1] to [file2]
-cp -r [dir1] [dir2] # recursively copy folder [dir1] to [dir2]
-mv [file1] [file2] # rename [file1] to [file2]
-mv [file] [dir] # move [file] into [dir], create [dir] if absent
-rm [file1] [file2] # delete multiple files
-rm -r [dir] # recursively delete folder [dir] and its contents
-ls | xargs rm -r # recursively delete everything in the working directory
+# example5: create multiple directories and multiple files within each, name them with date and time
+for i in {01..06}; do mkdir "`date +'%Y-%m-%d'`-MyFolder-${i%}"; done
+find . -type d -exec touch {}/`date +'%Y-%m-%d-%H:%M:%S'`-my-file-{01..04}.csv \; # make four csv files in each
 
-more -10 [file] # display the contents of [file], first 10 lines only
-less [file] # open [file] in vi editor, ctrl+Z to close
+# batch rename examples
+for i in *-doc-*.txt; do mv $i ${i/*-doc-/doc-}; done
+for i in ./*.pkg ; do mv "$i" "${i/-[0-9.]*.pkg/.pkg}" ; done
 
-grep -r [pattern] # display the file paths and text lines containing [pattern]
-[command] | grep [pattern] # find [pattern] in the STDOUT of [command]
-find -iname "*.txt" | xargs grep "abc" # find the string abc in all txt files, case insensitive
-ls *.jpg | xargs -n1 -i cp {} /external-hard-drive/directory # copy all images to external drive
-find / -name *.jpg -type f -print | xargs tar -cvzf images.tar.gz # find all jpg images in the system and archive them
-echo 'dir1 dir2 dir3' | xargs mkdir # make multiple directories
+## Examples:
+ls -al | grep rwx | cat > file1
+more file1 | grep orange | cat > file2
+grep -r sometext
+
+
 

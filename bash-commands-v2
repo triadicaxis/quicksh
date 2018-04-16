@@ -107,8 +107,10 @@ cal ## shows the current month calendar
 cal 7 2006 ## shows the calendar for July 2006
 cal feb 2015 ## shows the calendar for July 2006
 
-date
-date '+DATE: %d-%m-%y%nTIME: %H:%M:S' ## specify the date and time format
+date '+DATE: %d-%m-%y%nTIME: %H:%M:%S' ## specify the date and time format
+date +'%Y-%m-%d' ## example for file naming
+date +'%Y-%m-%d-%H%M%S'
+date +'%Y%m%d-%H%M%S'
 
 NETWORKING:
 ifconfig ## similar to ipconfig
