@@ -57,7 +57,7 @@ cat [file1] [file2] > [file3] # combine contents of multiple files into [file3]
 touch [file] # make new file named [file]
 echo {a..z} | xargs touch # create multiple files a-z
 mkdir [dir] # make new folder named [dir]
-mkdir ~/One/Two{1..3}
+mkdir ./One/Two{1..3}
 echo {01..20} | xargs mkdir # create multiple folders 01-20
 ln -s [file] link # make a link to [file]
 
