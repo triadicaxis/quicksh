@@ -16,6 +16,12 @@ find -name "* *" -type f | rename 's/ /_/g'
 for d in *\ *; do mv "$d" "${d// /}"; done # do the directories first
 for f in *\ *; do mv "$f" "${f// /_}"; done
 
+# batch rename add 'string-' to start of filenames (in current directory)
+for f in *; do mv "$f" "string-${f}"; done
+
+# batch rename add today's YYYY-MM-DD- to start of filenames (in current directory)
+for f in *; do mv "$f" "`date +'%Y-%m-%d-'`${f}"; done
+
 # batch rename replace underscores with dashes (need to test)
 find -name "*_*" -type f | rename 's/ /-/g'
 for f in *_*; do mv "$f" "${f// /-}"; done
@@ -24,4 +30,5 @@ for f in *_*; do mv -v "$f" $(echo "$f" | tr '_' '-'); done
 # batch rename additional examples (need to test)
 for i in *-doc-*.txt; do mv $i ${i/*-doc-/doc-}; done
 for i in ./*.pkg ; do mv "$i" "${i/-[0-9.]*.pkg/.pkg}" ; done
+
 
